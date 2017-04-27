@@ -27,31 +27,24 @@ def run_game():
 
   the_player = Player(screen,"./images 2/Hero.png",200,200)
   the_enemy = Enemy(screen)
+  # a_bullet = Bullet(screen,the_player,)
   the_player_group = Group()
   the_player_group.add(the_player)
   enemies = Group()
   enemies.add(the_enemy)
+  bullets = Group()
 
-  # r = 0
-  # b = 0
-  # g = 0
+  tick = 0
 
   # Main game loop run forever or until break
   while 1:
-    # r += 1
-    # b += 2
-    # g += 3
-    # if r == 255:
-    #   r = 130
-    # if b >= 250:
-    #   b = 30
-    # if g >= 250:
-    #   g = 0
-    # background_color = (r,b,g)
+    tick += 1
+    if tick % 300 == 0:
+      enemies.add(Enemy(screen))
     screen.fill(background_color)
     # The escape hatch from while
 
-    check_events(the_player)
+    check_events(the_player,screen,bullets)
 
     # Draw the player
     for player in the_player_group:
@@ -62,8 +55,12 @@ def run_game():
     for enemy in enemies:
       the_enemy.draw_me()
 
-    player_died = groupcollide(the_player_group, enemies, False, True)
+    for bullet in bullets:
+      bullet.update()
+      bullet.draw_bullet()
 
+    player_died = groupcollide(the_player_group, enemies, True, False)
+    enemy_died = groupcollide(enemies, bullets, True, True)
         # Clear the screen for the next time through the loop
     pygame.display.flip()
 

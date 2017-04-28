@@ -6,7 +6,7 @@ class Enemy(Sprite):
   def __init__(self, screen):
     super(Enemy,self).__init__()
     self.image = pygame.image.load("./images 2/2.png")
-    self.speed = 1
+    self.speed = 2
     self.screen = screen
     self.x = 900
     self.y = 400

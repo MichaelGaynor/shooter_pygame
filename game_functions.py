@@ -21,7 +21,7 @@ def check_events(the_player,screen,bullets):
       elif event.key == 276:
         the_player.should_move("left", True)
       if event.key == 32:
-        for direction in range(1,5):
+        for direction in range(1,3):
           new_bullet = Bullet(screen,the_player,direction)
           bullets.add(new_bullet)
       # print event.key
